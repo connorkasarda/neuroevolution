@@ -1,2 +1,2 @@
-# NeuroEvolution
-Fun space for learning about neural networks and how to generate them automatically via artificial evolution
+# Neuro Space
+Fun environment for learning about neural networks and how to generate them automatically via artificial evolution
