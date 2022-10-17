@@ -9,8 +9,8 @@ class SimpleNN:
         self.hiddens = hiddens
         self.outputs = outputs
         # Links layers of nodes with initial, random-weighted connections
-        self.wih = numpy.random.normal(0.0, pow(self.inputs, -0.5), (self.hiddens, self.inputs))
-        self.who = numpy.random.normal(0.0, pow(self.hiddens, -0.5), (self.outputs, self.hiddens))
+        self.ihweights = numpy.random.normal(0.0, pow(self.inputs, -0.5), (self.hiddens, self.inputs))
+        self.howeights = numpy.random.normal(0.0, pow(self.hiddens, -0.5), (self.outputs, self.hiddens))
         # Sets the learning rate
         self.lrate = lrate
         # Sets the activation function to the sigmoid function
@@ -21,24 +21,24 @@ class SimpleNN:
         isignals = numpy.array(ilist, ndmin=2).T
         tsignals = numpy.array(tlist, ndmin=2).T
         # Computes signal values into hidden layer
-        hsignals = self.afunc(numpy.dot(self.wih, isignals))
+        hsignals = self.afunc(numpy.dot(self.ihweights, isignals))
         # Computes signal values into output layer
-        osignals = self.afunc(numpy.dot(self.who, hsignals))
+        osignals = self.afunc(numpy.dot(self.howeights, hsignals))
         # Computes output layer signal error
         oerrors = tsignals - osignals
         # Computes hidden layer signal error
-        herrors = numpy.dot(self.who.T, oerrors)
+        herrors = numpy.dot(self.howeights.T, oerrors)
         # Updates the hidden-output weighted links based on computed errors
-        self.who += self.lrate * numpy.dot((oerrors * osignals * (1.0 - osignals)), numpy.transpose(hsignals))
+        self.howeights += self.lrate * numpy.dot((oerrors * osignals * (1.0 - osignals)), numpy.transpose(hsignals))
         # Updates the input-hidden weighted links based on computed errors
-        self.wih += self.lrate * numpy.dot((herrors * hsignals * (1.0 - hsignals)), numpy.transpose(isignals))
+        self.ihweights += self.lrate * numpy.dot((herrors * hsignals * (1.0 - hsignals)), numpy.transpose(isignals))
     # Queries the neural network
     def query(self, ilist):
         # Converts input list to 2D array
         isignals = numpy.array(ilist, ndmin=2).T
         # Computes signal values into hidden layer
-        hsignals = self.afunc(numpy.dot(self.wih, isignals))
+        hsignals = self.afunc(numpy.dot(self.ihweights, isignals))
         # Computes signal values into output layer
-        osignals = self.afunc(numpy.dot(self.who, hsignals))
+        osignals = self.afunc(numpy.dot(self.howeights, hsignals))
         # Returns the output signals as final output
         return osignals
