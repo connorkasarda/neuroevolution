@@ -1,5 +1,5 @@
 # Import necessary math packages
-import numpy, scipy.special
+import numpy, scipy.special, matplotlib.pyplot
 # Constructs 3-layer (input, hidden, and output) neural network from scratch using OOP
 class SimpleNN:
     # Initializes neural network
@@ -42,3 +42,52 @@ class SimpleNN:
         osignals = self.afunc(numpy.dot(self.howeights, hsignals))
         # Returns the output signals as final output
         return osignals
+
+# Sets number of input, hidden, and output nodes for neural network object
+num_inputs = 784
+num_hiddens = 100
+num_outputs = 10
+# Sets learning rate
+learn_rate = 0.3
+# Creates the instance of neural network
+nn = SimpleNN(num_inputs, num_hiddens, num_outputs, learn_rate)
+# Loads the MNIST training dataset (IMPORTANT: download the MNIST train and test dataset yourself! Otherwise, won't work!)
+train_file = open('NN/mnist_train.csv', 'r')
+train_list = train_file.readlines()
+train_file.close()
+# Goes through each record in training dataset
+for rec in train_list:
+    # Splits data with commas
+    values = rec.split(',')
+    # Scale the input data
+    inputs = (numpy.asfarray(values[1:]) / 255.0 * 0.99) + 0.01
+    # Creates target output values where final outputs are sent to
+    targets = numpy.zeros(num_outputs) + 0.01
+    # Emphasize that zeroeth elements are just labels
+    targets[int(values[0])] = 0.99
+    # Trains the neural network
+    nn.train(inputs, targets)
+# Loads the MNIST testing dataset
+test_file = open('NN/mnist_test.csv', 'r')
+test_list = test_file.readlines()
+test_file.close()
+# Sets the scorecard to keep track of neural network performance
+scorecard = []
+# Goes through each record in testing dataset
+for rec in test_list:
+    # Separates values by commas
+    values = rec.split(',')
+    # Stores correct value
+    correct = int(values[0])
+    # Scales inputs
+    inputs = (numpy.asfarray(values[1:]) / 255.0 * 0.99) + 0.01
+    # Queries the neural network
+    outputs = nn.query(inputs)
+    # Retrieve the predicted value
+    label = numpy.argmax(outputs)
+    # Choose if predicted is correct or incorrect and add to scorecard
+    if (label == correct): scorecard.append(1)
+    else: scorecard.append(0)
+# Calculates and prints the performance of the neural network
+array = numpy.asarray(scorecard)
+print('Performance: ', array.sum() / array.size)
