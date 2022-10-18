@@ -1,3 +1,9 @@
+"""
+Computes 3-layer neural network.
+Code comes from Make Your Own Neural Network book mentioned in References of README.
+This was used to help learn more about how neural networks work.
+Will use this as a foundation for learning more about neural networks, especially n-layered neural networks and NeuroEvolution concepts.
+"""
 # Import necessary math packages
 import numpy, scipy.special, matplotlib.pyplot
 # Constructs 3-layer (input, hidden, and output) neural network from scratch using OOP
