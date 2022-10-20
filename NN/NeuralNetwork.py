@@ -11,7 +11,7 @@ class NeuralNetwork:
         self.nodes = nodes
         self.learnrate = learnrate
         # Creates randomly weighted links between each pair of layers based on the Gaussian distribution
-        self.links = [numpy.random.normal(0.0, pow(self.nodes[layer - 1], -0.5), (self.nodes[layer], self.nodes[layer - 1])) for layer in range(1, len(self.nodes))]
+        self.webs = [numpy.random.normal(0.0, pow(self.nodes[layer - 1], -0.5), (self.nodes[layer], self.nodes[layer - 1])) for layer in range(1, len(self.nodes))]
         # Adds a lambda function that computes the sigmoid activation function
         self.activatefunc = lambda x: 1 / (1 + numpy.exp(-x))
     # Performs forward propagation to query the network
@@ -19,9 +19,9 @@ class NeuralNetwork:
         # Convert horizontal inputs list into a vertical list and use to initialize outputs
         outputs = numpy.array(inputs, ndmin=2).T
         # Propogate over each matrix of links, computing signals
-        for layer in range(0, len(self.nodes) - 1):
+        for level in self.webs:
             inputs = outputs
-            recieved = numpy.dot(self.links[layer], inputs)
+            recieved = numpy.dot(level, inputs)
             outputs = self.activatefunc(recieved)
         # Return the prediction
         return outputs
