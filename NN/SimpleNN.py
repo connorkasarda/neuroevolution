@@ -1,19 +1,22 @@
 """
-Builds 3-layer neural network.
+Builds and tests an n-layer neural network.
 """
 # Adds math packages for neural network
 import numpy
-# Blueprint for simple 3-layer neural network
-class SimpleNN:
+# Blueprint for n-layer neural network
+class NeuralNetwork:
     # Neural Network constructor
-    def __init__(self, numinner, numhidden, numouter, learnrate) -> None:
-        # Sets number of inner, hidden, and outer nodes as well as learning rate
-        self.numinner = numinner
-        self.numhidden = numhidden
-        self.numouter = numouter
+    def __init__(self, nodes, learnrate) -> None:
+        # Sets the list that represents number of nodes per layer as well as learning rate
+        self.nodes = nodes
         self.learnrate = learnrate
-        # Creates randomly weighted links between layers of nodes based on the Gaussian distribution
-        self.innerlinks = numpy.random.normal(0.0, pow(self.numinner, -0.5), (self.numhidden, self.numinner))
-        self.outerlinks = numpy.random.normal(0.0, pow(self.numouter, -0.5), (self.numouter, self.numhidden))
-        # Adds a lambda function that computes the activation function
+        # Creates randomly weighted links between each pair of layers based on the Gaussian distribution
+        self.links = [numpy.random.normal(0.0, pow(self.nodes[layer - 1], -0.5), (self.nodes[layer], self.nodes[layer - 1])) for layer in range(1, len(self.nodes))]
+        # Adds a lambda function that computes the sigmoid activation function
         self.activatefunc = lambda x: 1 / (1 + numpy.exp(-x))
+    # Performs forward propagation to query the network
+    def forward(self):
+        pass
+    # Performs backward propagation to train the network
+    def backward(self):
+        pass
