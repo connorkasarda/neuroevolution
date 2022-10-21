@@ -18,13 +18,14 @@ class NeuralNetwork:
     def forward(self, inputs):
         # Convert horizontal inputs list into a vertical list and use to initialize outputs
         outputs = numpy.array(inputs, ndmin=2).T
+        signals = []
         # Propogate over each matrix of links, computing signals
         for level in self.webs:
-            inputs = outputs
-            recieved = numpy.dot(level, inputs)
+            recieved = numpy.dot(level, outputs)
             outputs = self.activatefunc(recieved)
+            signals.append(outputs)
         # Return the prediction
-        return outputs
+        return signals
     # Performs backward propagation to train the network
     def backward(self):
         pass
