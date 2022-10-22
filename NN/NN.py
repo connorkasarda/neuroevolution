@@ -12,11 +12,11 @@ class NN:
         self.hiddens = hiddens
         self.outputs = outputs
         self.learnrate = learnrate
-        # Declares lambda functions that compute weight matrices, activation signals, verticalizations of lists, and weight updates
-        self.connect = lambda x, y: numpy.random.normal(scale=pow(x, -0.5), size=(y, x))
-        self.activation = lambda x: 1 / (1 + numpy.exp(-x))
-        self.verticalize = lambda x: numpy.array(x, ndmin=2).T
-        self.update = lambda x, y, z: self.learnrate * numpy.dot((x * y * (1.0 - y)), numpy.transpose(z))
+        # Declares lambda functions that connect nodes with weights, activation signals, verticalizations of lists, and weight updates
+        self.connect = lambda i, o: numpy.random.normal(scale=pow(i, -0.5), size=(o, i))
+        self.activate = lambda x: 1 / (1 + numpy.exp(-x))
+        self.verticalize = lambda a: numpy.array(a, ndmin=2).T
+        self.update = lambda e, o, i: self.learnrate * numpy.dot((e * o * (1.0 - o)), numpy.transpose(i))
         # Initialize weight matrices to connect the gaps between each pair of layers
         self.innerweb = self.connect(inputs, hiddens)
         self.outerweb = self.connect(hiddens, outputs)
@@ -25,8 +25,8 @@ class NN:
         # Converts inputs list into a vertical list
         inputvalues = self.verticalize(inputs)
         # Calculates hidden and outer level signal values
-        hiddenvalues = self.activation(numpy.dot(self.innerweb, inputvalues))
-        outputvalues = self.activation(numpy.dot(self.outerweb, hiddenvalues))
+        hiddenvalues = self.activate(numpy.dot(self.innerweb, inputvalues))
+        outputvalues = self.activate(numpy.dot(self.outerweb, hiddenvalues))
         # Returns hidden and output values
         return hiddenvalues, outputvalues
     # Performs backward propagation to train the network
