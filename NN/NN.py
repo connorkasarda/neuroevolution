@@ -6,17 +6,17 @@ import numpy
 # Blueprint for 3-layer neural network
 class NN:
     # Neural Network constructor
-    def __init__(self, inputs: int, hiddens: int, outputs: int, learnrate: float) -> None:
-        # Sets number of nodes for each layer and learning rate
+    def __init__(self, inputs: int, hiddens: int, outputs: int, alpha: float) -> None:
+        # Sets number of nodes for each layer and alpha (learning rate)
         self.inputs = inputs
         self.hiddens = hiddens
         self.outputs = outputs
-        self.learnrate = learnrate
+        self.alpha = alpha
         # Declares lambda functions that connect nodes with weights, activation signals, verticalizations of lists, and weight updates
         self.connect = lambda i, o: numpy.random.normal(scale=pow(i, -0.5), size=(o, i))
         self.activate = lambda x: 1 / (1 + numpy.exp(-x))
         self.verticalize = lambda a: numpy.array(a, ndmin=2).T
-        self.update = lambda e, o, i: self.learnrate * numpy.dot((e * o * (1.0 - o)), numpy.transpose(i))
+        self.update = lambda e, o, i: self.alpha * numpy.dot((e * o * (1.0 - o)), numpy.transpose(i))
         # Initialize weight matrices to connect the gaps between each pair of layers
         self.innerweb = self.connect(inputs, hiddens)
         self.outerweb = self.connect(hiddens, outputs)
