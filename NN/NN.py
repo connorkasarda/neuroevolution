@@ -23,10 +23,13 @@ class NN:
     # Performs forward propagation to query the network
     def query(self, inputs: list[float]) -> tuple:
         # Converts inputs list into a vertical list
-        inputvalues = self.verticalize(inputs)
-        # Calculates hidden and outer level signal values
-        hiddenvalues = self.activate(numpy.dot(self.innerweb, inputvalues))
-        outputvalues = self.activate(numpy.dot(self.outerweb, hiddenvalues))
+        inputsignals = self.verticalize(inputs)
+        # Calculates hidden and outer level signals
+        hiddensignals = numpy.dot(self.innerweb, inputsignals)
+        outputsignals = numpy.dot(self.outerweb, hiddensignals)
+        # Sends signals through activation function for final values
+        hiddenvalues = self.activate(hiddensignals)
+        outputvalues = self.activate(outputsignals)
         # Returns hidden and output values
         return hiddenvalues, outputvalues
     # Performs backward propagation to train the network
