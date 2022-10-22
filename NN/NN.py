@@ -3,8 +3,8 @@ Builds and tests a simple 3-layer (input, hidden, output) neural network.
 """
 # Adds math packages for neural network
 import numpy
-# Blueprint for n-layer neural network
-class NeuralNetwork:
+# Blueprint for 3-layer neural network
+class NN:
     # Neural Network constructor
     def __init__(self, inputs: int, hiddens: int, outputs: int, learnrate: float) -> None:
         # Sets number of nodes for each layer and learning rate

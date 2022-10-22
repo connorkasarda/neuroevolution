@@ -1,7 +1,7 @@
 # Neurospace
 Fun environment for learning about neural networks and how to generate them automatically via artificial evolution
 
-## Directories
+## Directory
 These directories separate the Neurospace project into many subprojects
 ### NN
 - The basics of neural networks
