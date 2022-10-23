@@ -3,9 +3,9 @@ Fun environment for learning about neural networks and how to generate them auto
 
 ## Directory
 These directories separate the Neurospace project into many subprojects
-### NN
+### NeuroManual
 - The basics of neural networks
-- Uses manual toggling and creation of nodes and weights to build neural networks
-### NEAT
-- Reveals the NEAT algorithm visually
-- Utilizes ideas inspired by evolution to construct a neural network from the bottom up
+- Uses manual creation of nodes and weights to build neural networks
+### NeuroEvolution
+- Explores the NEAT algorithm visually
+- Utilizes ideas inspired by evolution to stochastically construct a neural network from the bottom up
