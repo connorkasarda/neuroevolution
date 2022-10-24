@@ -5,7 +5,7 @@ Reference: Rashid, T. Make your own neural network Tariq Rashid. (CreateSpace In
 # Adds math packages for neural network
 import numpy, scipy.special
 # Blueprint for 3-layer neural network
-class NeuralNetwork:
+class Network:
     # Neural Network constructor
     def __init__(self, inputs, hiddens, outputs, alpha):
         # Sets number of nodes for each layer and alpha (learning rate)
