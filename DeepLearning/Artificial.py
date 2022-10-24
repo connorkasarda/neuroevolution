@@ -5,7 +5,7 @@ Purpose: Learn about deep learning by building an artificial neural network (can
 import numpy, scipy.special
 # Blueprint for each layer in the neural network
 class Web:
-    # Node layer constructor, where parents are nodes from previous layer and children are nodes from current layer
+    # Web matrix constructor, where parents are nodes from previous layer and children are nodes from current layer
     def __init__(self, parents, children, alpha):
         # Sets number of previous layer, current layer nodes, and learning rate
         self.parents = parents
