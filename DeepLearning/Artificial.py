@@ -19,9 +19,9 @@ class Web:
         data = numpy.array(inputs, ndmin=2).T
         # Calculates output of the web
         signals = numpy.dot(self.threads, data)
-        activation = scipy.special.expit(signals)
+        activations = scipy.special.expit(signals)
         # Returns the output of the web
-        return activation
+        return activations
     def update(self, errors, outers, inners):
         # Calculates change in weights
         delta = self.alpha * numpy.dot((errors * outers * (1.0 - outers)), numpy.transpose(inners))
