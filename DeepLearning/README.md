@@ -3,7 +3,7 @@ Building deep learning neural networks from scratch.
 
 ## Directory
 This folder contains varying deep learning neural network implementations
-- [ ] **Artificial.py** → Computes an Artificial Neural Network
+- [x] **Artificial.py** → Computes an Artificial Neural Network
 - [ ] **Recurrent.py** → Computes a Recurrent Neural Network
 - [ ] **Convolusion.py** → Computes a Convolusion Neural Network
 
