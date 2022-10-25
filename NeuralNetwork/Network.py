@@ -20,7 +20,6 @@ class Network:
         self.update = lambda e, o, i: self.alpha * numpy.dot((e * o * (1.0 - o)), numpy.transpose(i))
         # Initialize weight matrices to connect the gaps between each pair of layers
         self.innerweb = self.connect(inputs, hiddens)
-        print(self.innerweb)
         self.outerweb = self.connect(hiddens, outputs)
     # Performs forward propagation to query the network
     def query(self, inputs):

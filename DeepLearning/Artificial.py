@@ -1,6 +1,7 @@
 """
-Purpose: Learn about deep learning by building an artificial neural network (can have more than 1 hidden layer) from scratch.
-         Instead of layers of nodes, represented as layers of "webs" or matrices
+Purpose: Learn about deep learning by building an artificial neural network from scratch.
+         Can have more than 1 hidden layer but entire neural network must have at least a total of 3 layers.
+         New approach visualizes ANN or any NN as layers of "webs" or matrices instead of layers of nodes.
 """
 # Adds math packages for neural network
 import numpy, scipy.special
@@ -60,4 +61,15 @@ class Artificial:
         return prediction
     # Performs backward propagation for weight adjustments
     def train(self, inputs, targets):
-        pass
+        # Retrieves predictions from all layers of the network
+        query = self.query(inputs)
+        # Converts targets list into a vertical list
+        targets = self.verticalize(targets)
+        # Iterates over each web, calculating errors and updating weights
+        errors = targets - query[-1]
+        self.webs[-1].update(errors, query[-1], query[-2])
+        qiter = -2
+        for witer in range(len(self.webs) - 1, 0, -1):
+            errors = numpy.dot(self.webs[witer].threads.T, errors)
+            self.webs[witer - 1].update(errors, query[qiter], query[qiter - 1])
+            qiter -= 1
