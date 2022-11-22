@@ -2,7 +2,7 @@
 #ifndef NEURON_H
 #define NEURON_H
 // Dependencies for Neuron class
-#include <axon.h>
+#include <synapse.h>
 #include <vector>
 // Enumeration of the 3 possible roles a Neuron can be assigned to
 // 1) Sensor --> recieves INPUT from the environment and sends to Thinkers (or directly to Actors)
@@ -18,11 +18,11 @@ enum NeuronType {
 class Neuron 
 {
     int id;
-    NeuronType *type;
-    std::vector<Axon*> inputs;
-    std::vector<Axon*> outputs;
+    NeuronType type;
+    std::vector<Synapse*> inputs;
+    std::vector<Synapse*> outputs;
     public:
-        Neuron(int id, NeuronType type);
+        Neuron(int id, NeuronType type, std::vector<Synapse*> inputs, std::vector<Synapse*> outputs);
         void print();
 };
 #endif
